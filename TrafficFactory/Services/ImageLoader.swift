@@ -15,7 +15,7 @@ class ImageLoader: NSObject, ObservableObject, URLSessionDownloadDelegate {
     @Published var downloadProgress: Float = 0.0
 
     private var downloadTask: URLSessionDownloadTask?
-    private static let imageCache = NSCache<NSString, UIImage>()
+    public static let imageCache = NSCache<NSString, UIImage>()
 
     func loadImage(from url: String) {
         guard let url = URL(string: url) else { return }

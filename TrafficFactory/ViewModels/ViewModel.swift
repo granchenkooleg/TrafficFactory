@@ -10,13 +10,15 @@ import Combine
 import SwiftUI
 
 class ViewModel: ObservableObject {
+    public var resource: String
     @Published var items: [Item] = []
     @Published var isLoading = false
     @Published var errorMessage: String? = nil
 
     private var cancellable: AnyCancellable?
 
-    init() {
+    init(resource: String) {
+        self.resource = resource
         loadData()
     }
 
@@ -24,7 +26,7 @@ class ViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
-        cancellable = DataService.shared.fetch(forResource: "items", withExtension: "json")
+        cancellable = DataService.shared.fetch(forResource: resource, withExtension: "json")
             .sink(receiveCompletion: { completion in
                 if case let .failure(error) = completion {
                     DispatchQueue.main.async {

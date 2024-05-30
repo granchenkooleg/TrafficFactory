@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel = ViewModel(resource: "items")
 
     var body: some View {
         NavigationStack {
