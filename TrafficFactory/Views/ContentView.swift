@@ -11,7 +11,7 @@ struct ContentView: View {
     @StateObject private var viewModel = ViewModel(resource: "items")
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
                 ProgressView("Loading...")
                     .opacity(viewModel.errorMessage != nil || !viewModel.items.isEmpty ? 0 : 1)
@@ -28,15 +28,19 @@ struct ContentView: View {
                         }
                     }
                 } else {
-                    List(viewModel.items) { item in
-                        ItemCell(item: item)
-                            .listRowSeparator(.hidden)
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack {
+                            ForEach(viewModel.items) { item in
+                                ItemCell(item: item)
+                                    .padding()
+                            }
+                        }
                     }
-                    .listStyle(PlainListStyle())
                 }
             }
             .navigationTitle("Items")
         }
+        .navigationViewStyle(.stack)
     }
 }
 
