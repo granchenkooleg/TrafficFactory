@@ -34,7 +34,7 @@ class ViewModel: ObservableObject {
                 }
             }, receiveValue: { items in
                 DispatchQueue.main.async {
-                    //                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // To show the loader
+//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // To show the loader
                     self.items = items
                     self.isLoading = false
                 }
